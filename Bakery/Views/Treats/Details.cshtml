@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Bakery.Models
+@model Bakery.Models.Treat
+
+<div class="container">
+  <h1>Treat: @Html.DisplayFor(model => model.TreatName)</h1>
+
+  
+  @if (Model.JoinEntities.Count == 0)
+  {
+    <h3>You have no Flavors Associated with this Treat @Html.ActionLink("Now", "AddFlavor", new { id = Model.TreatId })</h3>
+  }
+  
+  <ul>
+    @foreach (TreatFlavor join in Model.JoinEntities)
+    {
+      <li>Flavor: @Html.ActionLink($"{join.Treat.TreatName}", "Details", "Flavor", new { id = join.Flavor.FlavorId})</li>
+  
+      @using (@Html.BeginForm("DeleteJoin", "Authors"))
+      {
+        @Html.Hidden("joinId", @join.TreatFlavorId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+  
+  @* <p>@Html.ActionLink("Remove", "Delete", new { id = Model.AuthorId }) Author</p> *@
+  
+  @if (Model.JoinEntities.Count != 0)
+  {
+    <p>@Html.ActionLink("Add", "AddFlavor", new { id = Model.TreatId }) to this Treat</p>
+  }
+  
+  <p>@Html.ActionLink("Edit", "Edit", new { id = Model.TreatId })</p>
+  
+  <p>See all @Html.ActionLink("Authors", "Index")</p>
+  
+  <p>See all @Html.ActionLink("Books", "Index", "Books")</p>
+  
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>
