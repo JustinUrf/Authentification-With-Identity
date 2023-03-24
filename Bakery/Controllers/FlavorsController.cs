@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Bakery.Models;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Security.Claims;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace Bakery.Controllers
@@ -53,6 +52,59 @@ namespace Bakery.Controllers
                           .ThenInclude(join => join.Treat)
                           .FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
+    }
+
+    [Authorize]
+    public ActionResult Edit(int id)
+    {
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Flavor flavor)
+    {
+      _db.Flavors.Update(flavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [Authorize]
+    public ActionResult Delete(int id)
+    {
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      _db.Flavors.Remove(thisFlavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [Authorize] 
+    public ActionResult AddTreat(int id)
+    {
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id );
+      ViewBag.treatId = new SelectList(_db.Treats, "TreatId", "TreatName");
+      return View(thisFlavor);
+    }
+
+    [HttpPost]
+    public ActionResult AddTreat(Flavor flavor, int TreatId)
+    {
+      #nullable enable
+      TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.TreatId == TreatId && join.FlavorId == flavor.FlavorId));
+      #nullable disable
+      if (joinEntity == null && TreatId != 0)
+      {
+        _db.TreatFlavors.Add(new TreatFlavor() { TreatId == TreatId, FlavorId == flavor.FlavorId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
 
   }
