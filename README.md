@@ -2,7 +2,7 @@
 
 #### By Justin Lee
 
-#### _.net Fullstack application that uses SQL databases to register an imaginary factory workers and workers that are qualified to fix certain machines._
+#### _.net Fullstack application that uses SQL databases that allows users to view Treats and their flavor profiles. Furthermore, it only allows signed up and registered users to edit, create, delete, or add relationship between treats and their flavor profile._
 ## Technologies Used
 
 * C#
