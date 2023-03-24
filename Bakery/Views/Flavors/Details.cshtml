@@ -6,12 +6,11 @@
 @model Bakery.Models.Flavor
 
 <div class="container">
-  <h2>Treats that have this flavor : </h2>
-  <h3>@Html.DisplayNameFor(model => model.FlavorName): @Html.DisplayFor(model => model.FlavorName)</h3>
+  <h2>Treats that have this flavor : @Html.DisplayFor(model => model.FlavorName)</h2>
 
   @if(Model.JoinEntities.Count == 0)
   {
-    <p> This flavor has no treats associated with it.</p>
+    <p> This flavor has no Treats associated with it. Add one @Html.ActionLink("Now?", "AddTreat", new { id = Model.FlavorId})</p>
   }
   else
   {
@@ -27,8 +26,15 @@
       }
     </ul>
   }
+  
+  <p>@Html.ActionLink("Remove this Flavor", "Delete", new { id = Model.FlavorId })</p>
   <p>@Html.ActionLink("Back to List of Flavors", "Index")</p>
+  <p>@Html.ActionLink("Add another sweet?", "Create")</p>
   <p>@Html.ActionLink("Edit this Flavors name", "Edit", new { id = Model.FlavorId })</p>
-  <p>@Html.ActionLink("Associate a Flavor to this treat", "AddFlavor", new { id = Model.FlavorId })</p>
+    @if (Model.JoinEntities.Count != 0)
+  {
+    <p>@Html.ActionLink("Associate another treat to this sweet", "AddFlavor", new { id = Model.FlavorId })  </p>
+  }
+  
   <p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>

@@ -5,13 +5,13 @@
 @model Bakery.Models.Flavor
 
 <div class="container">
-  <h2>Associate @Html.DisplayFor(model => model.FlavorName) with this treat</h2>
+  <h2>Associate "@Html.DisplayFor(model => model.FlavorName)" with this Treat</h2>
 
   @using (Html.BeginForm())
   {
     @Html.HiddenFor(model => model.FlavorId)
 
-    @Html.Label("Select a treat")
+    @Html.Label("Select a Treat")
     @Html.DropDownList("TreatId")
 
     <input type="submit" value="Save"/>
