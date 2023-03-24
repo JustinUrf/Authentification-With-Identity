@@ -14,15 +14,15 @@ namespace Bakery.Controllers
       _db = db;
     }
 
-    // [HttpGet("/")]
-    // public ActionResult Index()
-    // {
-      // Flavor theseFlavors = _db.Flavors.ToArray();
-      // Treat theseTreats = _db.Treats.ToArray();
-      // Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-      // model.Add("flavors", theseFlavors);
-      // model.Add("treats", theseTreats);
-      // return View(model);
-    // }
+    [HttpGet("/")]
+    public ActionResult Index()
+    {
+      Flavor[] theseFlavors = _db.Flavors.ToArray();
+      Treat[] theseTreats = _db.Treats.ToArray();
+      Dictionary<string,object[]> model = new Dictionary<string, object[]>();
+      model.Add("flavors", theseFlavors);
+      model.Add("treats", theseTreats);
+      return View(model);
+    }
   }
 }
