@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor
+
+<div class="container">
+  <h2>Associate @Html.DisplayFor(model => model.FlavorName) with this treat</h2>
+
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.FlavorId)
+
+    @Html.Label("Select a treat")
+    @Html.DropDownList("TreatId")
+
+    <input type="submit" value="Save"/>
+  }
+
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>
