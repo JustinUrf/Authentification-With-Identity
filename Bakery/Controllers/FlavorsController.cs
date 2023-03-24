@@ -39,9 +39,9 @@ namespace Bakery.Controllers
         return View(flavor);
       }
       else {
-      _db.Flavors.Add(flavor);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+        _db.Flavors.Add(flavor);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       }
     }
 
