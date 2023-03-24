@@ -101,10 +101,19 @@ namespace Bakery.Controllers
       #nullable disable
       if (joinEntity == null && TreatId != 0)
       {
-        _db.TreatFlavors.Add(new TreatFlavor() { TreatId == TreatId, FlavorId == flavor.FlavorId });
+        _db.TreatFlavors.Add(new TreatFlavor() { TreatId = TreatId, FlavorId = flavor.FlavorId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      TreatFlavor joinEntry = _db.TreatFlavors.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
+      _db.TreatFlavors.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
   }
