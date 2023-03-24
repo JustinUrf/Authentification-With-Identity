@@ -3,8 +3,20 @@
 }
 @using Bakery.Models
 <div class="container">
-  <h2>Login or register an account here!</h2>
-  <p>@Html.ActionLink("Register", "Register")</p>
-  <p>@Html.ActionLink("Login", "Login")</p>
-  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  @if (User.Identity.IsAuthenticated)
+  {
+    <h1>You are now logged into @User.Identity.Name</h1>
+    @using (Html.BeginForm("LogOff", "Account"))
+    {
+      <input type="submit" class="btn btn-primary" value="Log out">
+    }
+  }
+  else 
+  {
+    <h2>Login or register an account here!</h2>
+    <p>@Html.ActionLink("Register", "Register")</p>
+    <p>@Html.ActionLink("Login", "Login")</p>
+    <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  }
+
 </div>
