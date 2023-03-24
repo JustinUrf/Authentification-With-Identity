@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Bakery.Migrations
 {
-    public partial class AddInitialDatabaseCreation : Migration
+    public partial class AddDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -225,7 +225,7 @@ namespace Bakery.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "FlavorTreats",
+                name: "TreatFlavors",
                 columns: table => new
                 {
                     TreatFlavorId = table.Column<int>(type: "int", nullable: false)
@@ -235,15 +235,15 @@ namespace Bakery.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FlavorTreats", x => x.TreatFlavorId);
+                    table.PrimaryKey("PK_TreatFlavors", x => x.TreatFlavorId);
                     table.ForeignKey(
-                        name: "FK_FlavorTreats_Flavors_FlavorId",
+                        name: "FK_TreatFlavors_Flavors_FlavorId",
                         column: x => x.FlavorId,
                         principalTable: "Flavors",
                         principalColumn: "FlavorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FlavorTreats_Treats_TreatId",
+                        name: "FK_TreatFlavors_Treats_TreatId",
                         column: x => x.TreatId,
                         principalTable: "Treats",
                         principalColumn: "TreatId",
@@ -289,13 +289,13 @@ namespace Bakery.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FlavorTreats_FlavorId",
-                table: "FlavorTreats",
+                name: "IX_TreatFlavors_FlavorId",
+                table: "TreatFlavors",
                 column: "FlavorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FlavorTreats_TreatId",
-                table: "FlavorTreats",
+                name: "IX_TreatFlavors_TreatId",
+                table: "TreatFlavors",
                 column: "TreatId");
         }
 
@@ -317,7 +317,7 @@ namespace Bakery.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FlavorTreats");
+                name: "TreatFlavors");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

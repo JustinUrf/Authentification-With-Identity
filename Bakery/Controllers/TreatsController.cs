@@ -46,11 +46,10 @@ namespace Bakery.Controllers
 
     public ActionResult Details(int id)
     {
-      ViewBag.TreatId = new SelectList(_db.Flavors, "TreatId", "TreatId");
       Treat thisTreat = _db.Treats
-                          .Include(treat => treat.JoinEntities)
-                          .ThenInclude(join => join.Treat)
-                          .FirstOrDefault(treat => treat.TreatId == id);
+          .Include(treat => treat.JoinEntities)
+          .ThenInclude(join => join.Flavor)
+          .FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
 

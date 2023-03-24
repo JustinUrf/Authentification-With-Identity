@@ -131,7 +131,7 @@ namespace Bakery.Migrations
 
                     b.HasIndex("TreatId");
 
-                    b.ToTable("FlavorTreats");
+                    b.ToTable("TreatFlavors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.Migrations
 {
     [DbContext(typeof(BakeryContext))]
-    [Migration("20230324154537_AddInitialDatabaseCreation")]
-    partial class AddInitialDatabaseCreation
+    [Migration("20230324203340_AddDatabase")]
+    partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,7 +133,7 @@ namespace Bakery.Migrations
 
                     b.HasIndex("TreatId");
 
-                    b.ToTable("FlavorTreats");
+                    b.ToTable("TreatFlavors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
